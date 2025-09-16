@@ -8,7 +8,8 @@ function microbitsay (text: string) {
         lastVolume = 0
         for (let index = 0; index <= text.length - 1; index++) {
             freq = codeToFreq(text.charCodeAt(index + 1))
-            if (32 == text.charCodeAt(index + 1)) {
+            // We want to delineate words, so we jump to silence for the space
+            if (" ".charCodeAt(0) == text.charCodeAt(index + 1)) {
                 volume = 0
             } else {
                 volume = 255
@@ -27,7 +28,7 @@ function microbitsay (text: string) {
             lastFreq = freq
         }
         music.play(music.createSoundExpression(
-        WaveShape.Square,
+        WaveShape.Sine,
         lastFreq,
         freq,
         lastVolume,
@@ -40,7 +41,6 @@ function microbitsay (text: string) {
 }
 input.onButtonPressed(Button.B, function () {
     microbitsay("NO")
-    basic.pause(200)
 })
 function codeToFreq (num: number) {
     return baseFrequency + jump * (num - baseCode)
@@ -66,4 +66,3 @@ characterLength = 60
 jump = 100
 baseFrequency = 1500
 baseCode = "A".charCodeAt(0)
-serial.writeLine("" + (" ".charCodeAt(0)))
