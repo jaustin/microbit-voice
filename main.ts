@@ -1,6 +1,6 @@
 input.onButtonPressed(Button.A, function () {
-    speak_microbitishly("YES")
-    basic.pause(200)
+    speak_microbitishly("yes")
+    basic.showIcon(IconNames.Yes)
 })
 function speak_microbitishly (text: string) {
     if (0 < text.length) {
@@ -26,7 +26,7 @@ function speak_microbitishly (text: string) {
             characterLength,
             SoundExpressionEffect.None,
             InterpolationCurve.Logarithmic
-            ), music.PlaybackMode.UntilDone)
+            ), music.PlaybackMode.InBackground)
             lastVolume = volume
             lastFreq = freq
         }
@@ -43,7 +43,8 @@ function speak_microbitishly (text: string) {
     }
 }
 input.onButtonPressed(Button.B, function () {
-    speak_microbitishly("NO")
+    speak_microbitishly("no")
+    basic.showIcon(IconNames.No)
 })
 function codeToFreq (num: number) {
     return baseFrequency + jump * (num - baseCode)
@@ -69,7 +70,7 @@ let baseCode = 0
 let baseFrequency = 0
 let jump = 0
 let characterLength = 0
-characterLength = 60
+characterLength = 80
 jump = 50
 baseFrequency = 500
 baseCode = "A".charCodeAt(0)

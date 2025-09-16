@@ -1,5 +1,5 @@
 {
-    "name": "microbit voice",
+    "name": "microbit voice v2",
     "description": "",
     "dependencies": {
         "core": "*",
