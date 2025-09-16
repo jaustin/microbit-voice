@@ -1,8 +1,8 @@
 input.onButtonPressed(Button.A, function () {
-    microbitsay("YES")
+    speak_microbitishly("YES")
     basic.pause(200)
 })
-function microbitsay (text: string) {
+function speak_microbitishly (text: string) {
     if (0 < text.length) {
         lastFreq = codeToFreq(text.charCodeAt(0))
         lastVolume = 0
@@ -11,6 +11,9 @@ function microbitsay (text: string) {
             // We want to delineate words, so we jump to silence for the space
             if (" ".charCodeAt(0) == text.charCodeAt(index + 1)) {
                 volume = 0
+                if (simpleSpaces) {
+                    freq = lastFreq
+                }
             } else {
                 volume = 255
             }
@@ -40,29 +43,34 @@ function microbitsay (text: string) {
     }
 }
 input.onButtonPressed(Button.B, function () {
-    microbitsay("NO")
+    speak_microbitishly("NO")
 })
 function codeToFreq (num: number) {
     return baseFrequency + jump * (num - baseCode)
 }
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    microbitsay("OOOEEEEE")
+    speak_microbitishly("OOOEEEEE")
+    speak_microbitishly("oooeeeee")
     basic.pause(200)
-    microbitsay("ZZZXYWWVUTTTTT")
+    speak_microbitishly("ZZZXYWWVUTTTTT")
     basic.pause(200)
-    microbitsay("hello this is a little language")
+    speak_microbitishly("hello this is a little language. Punctuation works!")
+    simpleSpaces = false
+    speak_microbitishly("hello this is a little language. Punctuation works!")
     basic.pause(200)
-    microbitsay("hello my name is micro:bit")
+    speak_microbitishly("hello my name is micro:bit")
 })
 let volume = 0
 let freq = 0
 let lastVolume = 0
 let lastFreq = 0
+let simpleSpaces = false
 let baseCode = 0
 let baseFrequency = 0
 let jump = 0
 let characterLength = 0
 characterLength = 60
-jump = 100
-baseFrequency = 1500
+jump = 50
+baseFrequency = 500
 baseCode = "A".charCodeAt(0)
+simpleSpaces = true
