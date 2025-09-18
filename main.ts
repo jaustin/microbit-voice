@@ -1,8 +1,4 @@
-input.onButtonPressed(Button.A, function () {
-    speak_microbitishly("yes")
-    basic.showIcon(IconNames.Yes)
-})
-function speak_microbitishly (text: string) {
+function microbabble (text: string) {
     characterLength = 80
     jump = 50
     baseFrequency = 500
@@ -31,7 +27,7 @@ function speak_microbitishly (text: string) {
             characterLength,
             SoundExpressionEffect.None,
             InterpolationCurve.Logarithmic
-            ), music.PlaybackMode.UntilDone)
+            ), music.PlaybackMode.InBackground)
             lastVolume = volume
             lastFreq = freq
         }
@@ -47,19 +43,26 @@ function speak_microbitishly (text: string) {
         ), music.PlaybackMode.UntilDone)
     }
 }
+input.onButtonPressed(Button.A, function () {
+    microbabble("yes")
+    basic.showIcon(IconNames.Yes)
+})
 input.onButtonPressed(Button.B, function () {
-    speak_microbitishly("no")
+    microbabble("no")
     basic.showIcon(IconNames.No)
 })
 function codeToFreq (num: number) {
     return baseFrequency + jump * (num - baseCode)
 }
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    speak_microbitishly("hello")
-    basic.pause(200)
-    speak_microbitishly("hello this is a little language. Punctuation works!")
-    basic.pause(200)
-    speak_microbitishly("hello my name is micro:bit")
+    microbabble("hello this is a little \"language\". Words always sound the same.")
+    basic.pause(500)
+    microbabble("hello")
+    basic.pause(500)
+    microbabble("hello. You can hear \"hello\" in each clip here.")
+    basic.pause(500)
+    microbabble("hello my name is micro:bit")
+    basic.pause(500)
 })
 let volume = 0
 let freq = 0
@@ -70,4 +73,4 @@ let baseCode = 0
 let baseFrequency = 0
 let jump = 0
 let characterLength = 0
-speak_microbitishly("oooeeee")
+microbabble("oooeeee")
