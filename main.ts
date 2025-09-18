@@ -3,6 +3,11 @@ input.onButtonPressed(Button.A, function () {
     basic.showIcon(IconNames.Yes)
 })
 function speak_microbitishly (text: string) {
+    characterLength = 80
+    jump = 50
+    baseFrequency = 500
+    baseCode = "A".charCodeAt(0)
+    simpleSpaces = true
     if (0 < text.length) {
         lastFreq = codeToFreq(text.charCodeAt(0))
         lastVolume = 0
@@ -26,7 +31,7 @@ function speak_microbitishly (text: string) {
             characterLength,
             SoundExpressionEffect.None,
             InterpolationCurve.Logarithmic
-            ), music.PlaybackMode.InBackground)
+            ), music.PlaybackMode.UntilDone)
             lastVolume = volume
             lastFreq = freq
         }
@@ -38,7 +43,7 @@ function speak_microbitishly (text: string) {
         0,
         characterLength,
         SoundExpressionEffect.None,
-        InterpolationCurve.Linear
+        InterpolationCurve.Curve
         ), music.PlaybackMode.UntilDone)
     }
 }
@@ -50,13 +55,8 @@ function codeToFreq (num: number) {
     return baseFrequency + jump * (num - baseCode)
 }
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    speak_microbitishly("OOOEEEEE")
-    speak_microbitishly("oooeeeee")
+    speak_microbitishly("hello")
     basic.pause(200)
-    speak_microbitishly("ZZZXYWWVUTTTTT")
-    basic.pause(200)
-    speak_microbitishly("hello this is a little language. Punctuation works!")
-    simpleSpaces = false
     speak_microbitishly("hello this is a little language. Punctuation works!")
     basic.pause(200)
     speak_microbitishly("hello my name is micro:bit")
@@ -70,8 +70,4 @@ let baseCode = 0
 let baseFrequency = 0
 let jump = 0
 let characterLength = 0
-characterLength = 80
-jump = 50
-baseFrequency = 500
-baseCode = "A".charCodeAt(0)
-simpleSpaces = true
+speak_microbitishly("oooeeee")
